@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { CountDisplay, Counter, RenderCounter } from "./components";
+import { CountProvider } from "./context/StateUpdateContext";
 
 function App() {
+  const [, forceUpdate] = useState({});
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={{ border: "1px solid black", padding: 10 }}>
+        <RenderCounter />
+        <button onClick={() => forceUpdate({})}>force render</button>
+        <CountProvider>
+          <CountDisplay />
+          <Counter />
+        </CountProvider>
+      </div>
     </div>
   );
 }
